@@ -1,0 +1,10 @@
+Important Note: only jobs that borrow can be preempted (see https://github.com/kubernetes-sigs/kueue/issues/2681). 
+
+* Apply all preemption files
+* Configure two distributed workloads notebooks
+* Deploy team-b cluster with `head-cpu=2` and `min_cpu=1, num_workers=2` and add `labels={"kueue.x-k8s.io/priority-class":"dev-priority"}` to Ray cluster configuration
+* `watch oc get raycluster -A`
+* Deploy team-a cluster with `head-cpu=2` and `min_cpu=1, num_workers=2` and add `labels={"kueue.x-k8s.io/priority-class":"prod-priority"}` to Ray cluster configuration
+* observe preemption
+
+How to debug: use `oc get workloads` and look at the kueue status
